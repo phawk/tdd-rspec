@@ -1,15 +1,17 @@
 class Account
   attr_accessor :balance
 
-  def initialize
-    @balance = 0
+  def initialize(starting_balance = 0)
+    @balance = starting_balance
   end
 
-  def withdraw amount
-    @balance = @balance - amount.to_i
+  def deposit(amount)
+    raise "You cannot deposit more than 10,000" if amount > 10000
+    @balance += amount
   end
 
-  def deposit amount
-    @balance = @balance + amount.to_i
+  def withdraw(amount)
+    raise "You cannot withdraw more than the available balance" if amount > @balance
+    @balance -= amount
   end
 end
